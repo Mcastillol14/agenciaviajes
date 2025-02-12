@@ -1,23 +1,23 @@
 import express from 'express';
-const app = express();
-const router= express.Router();
+import {paginaInicio, paginaNosotros, paginaTestimonios, paginaViajes, paginaDetallesViajes, guardarTestimonios} from "../controllers/paginaController.js";
 
-router.get('/', (req, res) => {
-    const titulo = 'Agencia de viajes';
-    res.render('inicio',{
-        titulo: titulo
-    })
-});
+const router = express.Router();
 
-router.get('/nosotros', (req, res) => {
-    const titulo = 'Sobre nosotros';
-    res.render('nosotros', {
-        titulo: titulo
-    });
-});
+//req lo que enviamos / res lo que nos responde
+router.get('/', paginaInicio);
 
-router.get('/contacto', (req, res) => {
-    res.send('Contacto');
-});
+router.get('/nosotros',paginaNosotros);
+
+router.get('/testimonios', paginaTestimonios);
+
+router.get('/viajes',paginaViajes);
+
+//Los dos puntos es como un comodín y no repetir las páginas
+router.get('/viajes/:slug',paginaDetallesViajes);
+
+router.post('/testimonios', guardarTestimonios);
+
+
 
 export default router;
+
