@@ -71,13 +71,13 @@ const paginaTestimonios = async (req, res) => {
 
 }
 
-const paginaAcceder= async(req,res)=>{
-    try{
-        if(req.session.cliente){
+const paginaAcceder = async (req, res) => {
+    try {
+        if (req.session.cliente) {
             return res.redirect('/')
         }
-        res.render('acceder',{pagina: 'Acceder'})
-    }catch(err){
+        res.render('acceder', { pagina: 'Acceder' })
+    } catch (err) {
         res.status(500).json({ mensaje: "Error al cargar la página" });
 
     }
@@ -148,7 +148,6 @@ const guardarTestimonios = async (req, res) => {
 
 const registrarUsuario = async (req, res) => {
     const { nombre, apellidos, email, password } = req.body;
-
     const errores = []
 
     if (nombre.trim() === "") {
@@ -158,18 +157,23 @@ const registrarUsuario = async (req, res) => {
         errores.push('El campo de apellidos es obligatorio')
     }
     if (email.trim() === "") {
-        errores.push('El campo de email es obligatorio ')
+        errores.push('El campo de email es obligatorio')
     }
-
     if (password.trim() === "") {
         errores.push('El campo de contraseña es obligatorio')
+    }
+
+    if (errores.length > 0) {
+        return res.render('acceder', { errores, nombre, apellidos, email });
     }
 
     try {
         const existeUsuario = await Cliente.findOne({ where: { correoelectronico: email } })
         if (existeUsuario) {
-                return res.status(400).json({ mensaje: "El correo electronico ya esta registrado" })
+            errores.push('El correo electrónico ya está registrado')
+            return res.render('acceder', { errores, nombre, apellidos, email });
         }
+
         const passwordEncriptada = await bcrypt.hash(password, 12)
         await Cliente.create({
             nombre,
@@ -178,46 +182,55 @@ const registrarUsuario = async (req, res) => {
             password: passwordEncriptada
         })
         res.redirect('/acceder')
-
     } catch (error) {
-        res.status(500).json({ mensaje: "Error inesperado en el servidor" })
+        errores.push('Error inesperado en el servidor')
+        return res.render('acceder', { errores, nombre, apellidos, email });
     }
-
 }
-const iniciarSesion= async(req,res)=>{
- try {
-    const {emailIniciar, passwordIniciar}=req.body;
-    console.log(emailIniciar)
-    console.log(passwordIniciar)
-    const errores=[]
-    if(emailIniciar.trim()===""){
-        errores.push('El campo email es obligatorio')
-    }
-    if(passwordIniciar.trim()===""){
-        errores.push('El campo de contraseña es obligatorio')
-    }
 
-    const emailLogin= await Cliente.findOne({where:{correoelectronico:emailIniciar}})
-    if(!emailLogin){
-        return res.status(400).json({mensaje:"El correo electronico no esta registrado"})
-    }
 
-    const passwordCorrecta= await bcrypt.compare(passwordIniciar, emailLogin.password)
-    if(!passwordCorrecta){
-        return res.status(400).json({mensaje:"La contaseña es incorrecta"})
-    }
-    req.session.cliente={
-        id:emailLogin.id,
-        nombre:emailLogin.nombre,
-        email:emailLogin.correoelectronico
-    };
-    res.redirect('/')
- } catch (error) {
-    res.status(500).json({mensaje:"Error inesperado con el servidor"})
-    console.log(error)
- }
+const iniciarSesion = async (req, res) => {
+    try {
+        const { emailIniciar, passwordIniciar } = req.body;
+        const errores = []
 
+        if (emailIniciar.trim() === "") {
+            errores.push('El campo email es obligatorio')
+        }
+        if (passwordIniciar.trim() === "") {
+            errores.push('El campo de contraseña es obligatorio')
+        }
+
+        if (errores.length > 0) {
+            return res.render('acceder', { errores, emailIniciar });
+        }
+
+        const emailLogin = await Cliente.findOne({ where: { correoelectronico: emailIniciar } })
+        if (!emailLogin) {
+            errores.push("El correo electrónico no está registrado")
+            return res.render('acceder', { errores, emailIniciar });
+        }
+
+        const passwordCorrecta = await bcrypt.compare(passwordIniciar, emailLogin.password)
+        if (!passwordCorrecta) {
+            errores.push("La contraseña es incorrecta")
+            return res.render('acceder', { errores, emailIniciar });
+        }
+
+        req.session.cliente = {
+            id: emailLogin.id,
+            nombre: emailLogin.nombre,
+            email: emailLogin.correoelectronico
+        };
+
+        res.redirect('/')
+    } catch (error) {
+        errores.push('Error inesperado con el servidor')
+        return res.render('acceder', { errores, emailIniciar });
+    }
 }
+
+
 const cerrarSesion = (req, res) => {
     req.session.destroy((err) => {
         if (err) {

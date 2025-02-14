@@ -4,6 +4,13 @@ block contenido
     div.container.mt-5
         h1.text-center.mb-5 Formulario de Registro y Login
 
+    // Mostrar errores generales si existen
+    if errores && errores.length > 0
+        div.alert.alert-danger
+            ul
+                each error in errores
+                    li= error
+
     div.row.justify-content-center
         div.col-md-5
             h2.text-center.mb-4 Registrarse
@@ -11,7 +18,7 @@ block contenido
                 div.form-group
                     label(for="nombre" class="font-weight-bold") Nombre
                     input(type="text" class="form-control form-control-lg rounded-pill shadow-sm" id="nombre" name="nombre" placeholder="Tu nombre" required)
-
+                
                 div.form-group
                     label(for="apellidos" class="font-weight-bold") Apellidos
                     input(type="text" class="form-control form-control-lg rounded-pill shadow-sm" id="apellidos" name="apellidos" placeholder="Tus apellidos" required)
