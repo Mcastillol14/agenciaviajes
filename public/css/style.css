@@ -93,12 +93,26 @@ footer .nav a,
     color: black;
 }
 .listado-iconos {
-    background-color: rgb(245, 245, 245);
+    background-color: #f5f5f5;
 }
 .listado-iconos img {
     height: 100px;
 }
 
+.titulo-acceder {
+    font-family: 'Staatliches', cursive;
+    font-size: 3.4rem;
+    color: #f5f5f5;
+    background: #f5f5f589;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.titulo-acceder:hover {
+    color: #f5f5f5;
+}
 
 .descuento {
     height: 400px;

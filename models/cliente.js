@@ -5,11 +5,11 @@ export const Cliente = db.define('Cliente', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true, // Asegura que el `id` sea autoincremental
+        autoIncrement: true, 
     },
     nombre: {
         type: Sequelize.STRING,
-        allowNull: false,  // Asegura que el campo `nombre` no sea nulo
+        allowNull: false,  
     },
     apellidos: {
         type: Sequelize.STRING,
@@ -18,15 +18,15 @@ export const Cliente = db.define('Cliente', {
     correoelectronico: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true, // Para asegurar que no haya correos duplicados
+        unique: true,
     },
-    telefono: {
+    password:{
         type: Sequelize.STRING,
         allowNull: false,
-    },
+    }
 }, {
-    tableName: 'clientes', // Asegúrate de que la tabla se llame 'clientes'
-    // timestamps: false, // Si no deseas los campos `createdAt` y `updatedAt`
+    tableName: 'clientes',
+    // timestamps: false, 
 });
 
 // Sincroniza la base de datos

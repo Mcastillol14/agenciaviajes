@@ -1,0 +1,40 @@
+extends ./layout/index
+
+block contenido
+    div.container.mt-5
+        h1.text-center.mb-5 Formulario de Registro y Login
+
+    div.row.justify-content-center
+        div.col-md-5
+            h2.text-center.mb-4 Registrarse
+            form(action="/registrar" method="POST")
+                div.form-group
+                    label(for="nombre" class="font-weight-bold") Nombre
+                    input(type="text" class="form-control form-control-lg rounded-pill shadow-sm" id="nombre" name="nombre" placeholder="Tu nombre" required)
+
+                div.form-group
+                    label(for="apellidos" class="font-weight-bold") Apellidos
+                    input(type="text" class="form-control form-control-lg rounded-pill shadow-sm" id="apellidos" name="apellidos" placeholder="Tus apellidos" required)
+
+                div.form-group
+                    label(for="email" class="font-weight-bold") Email
+                    input(type="email" class="form-control form-control-lg rounded-pill shadow-sm" id="email" name="email" placeholder="Tu email" required)
+
+                div.form-group
+                    label(for="password" class="font-weight-bold") Contraseña
+                    input(type="password" class="form-control form-control-lg rounded-pill shadow-sm" id="password" name="password" placeholder="Tu contraseña" required)
+
+                button(type="submit" class="btn btn-primary btn-lg btn-block rounded-pill shadow-sm") Registrarse
+
+        div.col-md-5
+            h2.text-center.mb-4 Iniciar Sesión
+            form(action="/iniciar" method="POST")
+                div.form-group
+                    label(for="emailIniciar" class="font-weight-bold") Email
+                    input(type="email" class="form-control form-control-lg rounded-pill shadow-sm" id="emailIniciar" name="emailIniciar" placeholder="Tu email" required)
+
+                div.form-group
+                    label(for="passwordIniciar" class="font-weight-bold") Contraseña
+                    input(type="password" class="form-control form-control-lg rounded-pill shadow-sm" id="passwordIniciar" name="passwordIniciar" placeholder="Tu contraseña" required)
+
+                button(type="submit" class="btn btn-success btn-lg btn-block rounded-pill shadow-sm") Iniciar Sesión
