@@ -10,7 +10,6 @@ La aplicación de Agencia de Viajes ofrece las siguientes funcionalidades:
 - Ver detalles de los viajes, incluyendo precios y fechas
 - Realizar reservaciones de viajes
 - Gestionar testimonios de clientes
-- Interfaz de administración para gestionar viajes y reservaciones
 
 ## Tecnologías Utilizadas
 
@@ -27,7 +26,6 @@ La aplicación de Agencia de Viajes ofrece las siguientes funcionalidades:
 - sequelize: ORM para interactuar con la base de datos MySQL
 - mysql2: Driver de MySQL para Node.js
 - dotenv: Para manejar variables de entorno
-- express-validator: Para validar y sanitizar datos de entrada
 - bcrypt-nodejs: Para el hash de contraseñas
 - express-session: Para manejar sesiones de usuario
 
