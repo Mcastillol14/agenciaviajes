@@ -104,4 +104,4 @@ Reemplaza los valores de ejemplo con tus credenciales reales:
 
 Para CONEXION, reemplaza con tu cadena de conexión MySQL.
 Para SECRET_KEY, reemplaza con una cadena aleatoria segura para la gestión de sesiones.
-Nota: Nunca cometas tu archivo .env real al control de versiones. Asegúrate de que .env esté listado en tu archivo .gitignore.
+Nota: Nunca metas tu archivo .env real al control de versiones. Asegúrate de que .env esté listado en tu archivo .gitignore.
