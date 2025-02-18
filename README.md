@@ -2,6 +2,7 @@
 
 Este proyecto es una aplicación web para una agencia de viajes que permite a los usuarios explorar y reservar viajes a diferentes destinos.
 Página en producción: https://agenciaviajes-kxak.onrender.com
+La modificación añadida ha sido implementar un registro/login usando una encriptación de contraseña y despues controlando las sesiones con express-session
 ## Descripción
 
 La aplicación de Agencia de Viajes ofrece las siguientes funcionalidades:
